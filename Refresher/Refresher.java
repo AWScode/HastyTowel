@@ -1,26 +1,31 @@
+/*
+Program Name: Refresher.java
+Program description: output conversation result due to the level of risk
+the user picked
+Programmer: Kitty & Nerissa
+Version: Oct 5
+*/
+
 import java.util.*;
 import java.io.*;
 public class Refresher{
-
-  //declare lists for each level of risk
-  //ArrayList<String> highRisk;
-  //ArrayList<String> middleRisk;
-  //ArrayList<String> lowRisk;
-  //HashMap<String, Integer> list;
-
   //set the main method
   public static void main(String args[]){
-    //initiate instance variables
+    //declare lists for each level of risk
+    //ArrayList<String> highRisk;
+    //ArrayList<String> middleRisk;
+    //ArrayList<String> lowRisk;
+    //HashMap<String, Integer> list;
     ArrayList<String> highRisk= new ArrayList<>();
     ArrayList<String> middleRisk= new ArrayList<>();
     ArrayList<String> lowRisk=new ArrayList<>();
     HashMap<String, Integer> list= new HashMap<>();
 
     File file= new File("topics.txt");
-//open the file which names “topics.txt”
+    //open the file which names “topics.txt”
     try{
       Scanner text= new Scanner(file);
-//create a list for recording frequency of each topic
+      //create a list for recording frequency of each topic
       while(text.hasNextLine()){
         String topic =text.nextLine();
         if(list.containsKey(topic)){
@@ -35,7 +40,7 @@ public class Refresher{
     catch( FileNotFoundException oops){
       System.out.println("File not found");
     }
-//calculate the frequency of each topic
+    //calculate the frequency of each topic
 
     for(String word: list.keySet()){
       if(list.get(word)<3){
@@ -49,6 +54,7 @@ public class Refresher{
       }
     }
 
+    //user inputs the level of risk
     System.out.println("You find yourself stranded at the watercooler with Jenny and Bill. What do you say?");
     System.out.println("write: low-risk, high-risk, or middle-risk ");
     Scanner input = new Scanner (System.in);
@@ -58,6 +64,7 @@ public class Refresher{
     int middleMax= middleRisk.size();
     int highMax= highRisk.size();
 
+    //picks on that risk topic to print out the conversation
     if (order.equals("low-risk")&& lowMax>0){
 	    String topic= lowRisk.get(rand.nextInt(lowMax));
       System.out.println("So how did " + topic + " go?");
