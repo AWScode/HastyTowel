@@ -10,6 +10,9 @@ school
 war
 politics
 psychology
+psychology
+psychology
+psychology
 war
 music
 game

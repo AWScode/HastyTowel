@@ -30,7 +30,8 @@ public class Refresher{
         String topic =text.nextLine();
         if(list.containsKey(topic)){
           int count=list.get(topic);
-          list.put(topic, count++);
+          count++;
+          list.put(topic, count);
         }
         else{
           list.put(topic,1);
