@@ -45,13 +45,13 @@ public class Refresher{
 
     for(String word: list.keySet()){
       if(list.get(word)<3){
-	      lowRisk.add(word);
+	      highRisk.add(word);
       }
       else if(list.get(word)>=3 && list.get(word)<5){
         middleRisk.add(word);
       }
       else{
-       	highRisk.add(word);
+       	lowRisk.add(word);
       }
     }
 
