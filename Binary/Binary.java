@@ -1,70 +1,107 @@
 import java.util.*;
-import java.io.*;
-public class Binary {
-  static String num1;
-  static String num2;
+import java.lang.*;
+public class Binary{
+  static int[] bin1=new int[8];
+  static int[] bin2=new int[8];
+  int[] result=new int[8];
   public static void main(String[] args){
-      Binary test = new Binary();
-      while(true){
-        System.out.println("Input first binary number :");
-        Scanner input1= new Scanner(System.in);
-        num1= input1.nextLine();
+    Binary test=new Binary();
 
-        System.out.println("Input second binary number :");
-        Scanner input2= new Scanner(System.in);
-        num2= input2.nextLine();
+    System.out.println("Input first binary number :");
+    Scanner input1= new Scanner(System.in);
+    String num1= input1.nextLine();
 
-        System.out.println("Choose: add, substract, multiply, divide (type 1 to quit)");
-        Scanner input3=new Scanner(System.in);
-        char operator= input3.next().charAt(0);
+    System.out.println("Input second binary number :");
+    Scanner input2= new Scanner(System.in);
+    String num2= input2.nextLine();
 
-        if(operator=='a' || operator=='A'){
-            System.out.println(test.addition());
+    test.number(num1, num2);
+
+  /*  System.out.println("Input second binary number :");
+    Scanner input3= new Scanner(System.in);
+    char operator= input3.next().charAt(0);
+    */
+    //  System.out.println(Arrays.toString(test.addition(bin1,bin2)));
+      System.out.println(Arrays.toString(test.substraction()));
+  /*
+  if(operator=='a' || operator=='A'){
+    System.out.println(Arrays.toString(test.addition()));
+  }
+  else if(operator=='s' || operator=='S'){
+      System.out.println(Arrays.toString(test.substraction()));
+    }
+*/
+
+
+  }
+
+  public void number(String a, String b){
+    for(int i=0; i<a.length(); i++){
+      bin1[8-a.length()+i]=(int)a.charAt(i)-'0';
+    }
+    for(int i=0; i<b.length(); i++){
+      bin2[8-b.length()+i]=(int)b.charAt(i)-'0';
+    }
+  }
+
+  public int[] addition(int[] a, int[] b){
+    boolean overflow=false;
+    for(int i=7; i>=0; i--){
+      if(a[i]==b[i]){
+        result[i]=0;
+        if(overflow){
+          result[i]=1;
+          overflow=false;
         }
-        else if(operator=='s' || operator=='S'){
-            System.out.println(test.substraction());
+        if(a[i]==1){
+          overflow=true;
         }
-        else if(operator=='m' || operator=='M'){
-            System.out.println(test.multiply());
-        }
-        else if(operator=='D' || operator=='d'){
-            System.out.println(test.division());
-        }
-        else if(operator=='1'){
-          System.out.println("The program has ended as you have requested.");
-          break;
-        }
-        else{
-          System.out.println("Invalid inputs please try again.");
+      }
+      else{
+        result[i]=1;
+        if(overflow){
+          result[i]=0;
+          overflow=true;
         }
       }
     }
+    return result;
+  }
 
-    public String addition(){
-        int a = Integer.parseInt(num1, 2);
-        int b = Integer.parseInt(num2, 2);
-        int sum = a+b;
-        return Integer.toBinaryString(sum);
-    }
 
-    public String substraction(){
-        int a = Integer.parseInt(num1, 2);
-        int b = Integer.parseInt(num2, 2);
-        int diff = a+b;
-        return Integer.toBinaryString(diff);
-    }
+  public int[] substraction(){
+    int[] negBin2= new int[8];
+    int[] complement= new int[] {0,0,0,0,0,0,0,1};
 
-    public String multiply(){
-        int a = Integer.parseInt(num1, 2);
-        int b = Integer.parseInt(num2, 2);
-        int prod = a*b;
-        return Integer.toBinaryString(prod);
+    for(int i=0; i<8; i++){
+      if(bin2[i]==0){
+        negBin2[i]=1;
+      }
+      else{
+        negBin2[i]=0;
+      }
     }
+    negBin2=addition(negBin2,complement);
+    System.out.println(Arrays.toString(negBin2));
+    return addition(bin1, negBin2);
+  }
 
-    public String division(){
-        int a = Integer.parseInt(num1, 2);
-        int b = Integer.parseInt(num2, 2);
-        int result =a/b;
-        return Integer.toBinaryString(result);
+  public int[] multiply(){
+    int mut=0;
+    for(int i=0; i<8 ; i++){
+      mut+=bin2[i]*Math.pow(2,i);
     }
+    System.out.println(mut);
+    result=bins1;
+    for(int i=1; i< mut; i++){
+      result=addition(result, bin1);
+    }
+    //System.out.println(Arrays.toString(result));
+    return result;
+  /*  for(int i=0; i<8; i++){
+      for(int j=0; j<8; j++){
+
+      }
+    }*/
+  }
 }
