@@ -23,19 +23,36 @@ public class Binary{
 
     test.number(num1, num2);
 
-  /*  System.out.println("Input second binary number :");
+  /* System.out.println("Choose: add, substract, multiply, divide (to quit the program enter 1)");
     Scanner input3= new Scanner(System.in);
     char operator= input3.next().charAt(0);
-    */
-    System.out.println("addition"+Arrays.toString(test.addition(bin1,bin2)));
-      System.out.println("multiply"+Arrays.toString(test.multiply()));
-  /*
-  if(operator=='a' || operator=='A'){
-    System.out.println(Arrays.toString(test.addition()));
-  }
-  else if(operator=='s' || operator=='S'){
-      System.out.println(Arrays.toString(test.substraction()));
+  */
+
+    System.out.println("add"+Arrays.toString(test.addition(bin1,bin2)));
+    System.out.println("minus"+Arrays.toString(test.substraction()));
+    System.out.println("multiply"+Arrays.toString(test.multiply()));
+/*
+  while(operator!='1'){
+    if(operator=='a' || operator=='A'){
+      System.out.println(Arrays.toString(test.addition(bin1,bin2)));
     }
+    else if(operator=='s' || operator=='S'){
+        System.out.println(Arrays.toString(test.substraction()));
+    }
+    else if(operator=='m' || operator=='M'){
+        System.out.println(Arrays.toString(test.multiply()));
+    }
+    else if(operator=='d' || operator=='D'){
+        System.out.println(Arrays.toString(test.division()));
+    }
+    else{
+        System.out.println("Invalid input.");
+    }
+    System.out.println("Choose: add, substract, multiply, divide (to quit the program enter 1)");
+    Scanner input4= new Scanner(System.in);
+    operator= input4.next().charAt(0);
+  }
+  System.out.println("The program has ended as requested."));
 */
 
 
@@ -106,10 +123,13 @@ public class Binary{
     //be aware array is a object "copyOf" prevent the value being overwrite
     for(int i=1; i<=mut; i++){
       newresult=Arrays.copyOf(result,8);
-      System.out.println(i+Arrays.toString(result));
       result=addition(newresult, bin1);
-      System.out.println(i+Arrays.toString(result));
     }
     return result;
   }
+
+  //Method for dividing the two binary inputs
+//  public int[] division(){
+
+//  }
 }
