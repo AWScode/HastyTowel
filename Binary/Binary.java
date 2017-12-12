@@ -10,14 +10,16 @@ public class Binary{
   static int[] bin1=new int[8];
   static int[] bin2=new int[8];
   int[] result=new int[8];
+  int[] remainder= new int[8];
+
   public static void main(String[] args){
     Binary test=new Binary();
 
-    System.out.println("Input first binary number :");
+    System.out.println("Input first 8-bits-binary number :");
     Scanner input1= new Scanner(System.in);
     String num1= input1.nextLine();
 
-    System.out.println("Input second binary number :");
+    System.out.println("Input second 8-bits-binary number :");
     Scanner input2= new Scanner(System.in);
     String num2= input2.nextLine();
 
@@ -28,22 +30,23 @@ public class Binary{
     char operator= input3.next().charAt(0);
   */
 
-    System.out.println("add"+Arrays.toString(test.addition(bin1,bin2)));
-    System.out.println("minus"+Arrays.toString(test.substraction()));
-    System.out.println("multiply"+Arrays.toString(test.multiply()));
+  //  System.out.println("add"+Arrays.toString(test.addition(bin1,bin2)));
+  //  System.out.println("minus"+Arrays.toString(test.substraction()));
+  //  System.out.println("multiply"+Arrays.toString(test.multiply()));
+  System.out.println("division"+Arrays.toString(test.division())+ " Remainder: "+Arrays.toString(test.getRemainder()));
 /*
   while(operator!='1'){
     if(operator=='a' || operator=='A'){
       System.out.println(Arrays.toString(test.addition(bin1,bin2)));
     }
     else if(operator=='s' || operator=='S'){
-        System.out.println(Arrays.toString(test.substraction()));
+        System.out.println(Arrays.toString(test.substraction(bin1,bin2)));
     }
     else if(operator=='m' || operator=='M'){
         System.out.println(Arrays.toString(test.multiply()));
     }
     else if(operator=='d' || operator=='D'){
-        System.out.println(Arrays.toString(test.division()));
+        System.out.println(Arrays.toString(test.division()) \n "Remainder: "+test.getRemainder());
     }
     else{
         System.out.println("Invalid input.");
@@ -94,20 +97,20 @@ public class Binary{
   }
 
   //Method for minusing the two binary inputs
-  public int[] substraction(){
+  public int[] substraction(int[] a, int[] b){
     int[] negBin2= new int[8];
     int[] complement= new int[] {0,0,0,0,0,0,0,1};
 
     for(int i=0; i<8; i++){
-      if(bin2[i]==0){
+      if(b[i]==0){
         negBin2[i]=1;
       }
       else{
         negBin2[i]=0;
       }
     }
-    negBin2=addition(negBin2,complement);
-    return addition(bin1, negBin2);
+    negBin2=Arrays.copyOf(addition(negBin2,complement),8);
+    return addition(a, negBin2);
   }
 
   //Method for multiplying the two binary inputs
@@ -123,13 +126,34 @@ public class Binary{
     //be aware array is a object "copyOf" prevent the value being overwrite
     for(int i=1; i<=mut; i++){
       newresult=Arrays.copyOf(result,8);
-      result=addition(newresult, bin1);
+      result=Arrays.copyOf(addition(newresult, bin1),8);
     }
     return result;
   }
 
   //Method for dividing the two binary inputs
-//  public int[] division(){
-
-//  }
+  public int[] division(){
+    remainder=Arrays.copyOf(bin1,8);
+    int count=0;
+    while(true){
+      int[] newresult=Arrays.copyOf(remainder,8);
+      remainder=Arrays.copyOf(substraction(newresult, bin2),8);
+      if(remainder[0]!=1){
+        count++;
+      }
+      else if(remainder[0]==1){
+        remainder=Arrays.copyOf(newresult,8);
+        break;
+      }
+    }
+    for(int i=0; i<8; i++){
+      int binary= count/(int)Math.pow(2,7-i);
+      count=count%(int)Math.pow(2,7-i);
+      result[i]=binary;
+    }
+    return result;
+  }
+  public int[] getRemainder(){
+    return remainder;
+  }
 }
