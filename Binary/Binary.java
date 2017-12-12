@@ -13,52 +13,47 @@ public class Binary{
   int[] remainder= new int[8];
 
   public static void main(String[] args){
-    Binary test=new Binary();
+    while(true){
+      Binary test=new Binary();
+      //setting up inputs
+      System.out.println("Input first 8-bits-binary number :");
+      Scanner input1= new Scanner(System.in);
+      String num1= input1.nextLine();
 
-    System.out.println("Input first 8-bits-binary number :");
-    Scanner input1= new Scanner(System.in);
-    String num1= input1.nextLine();
+      System.out.println("Input second 8-bits-binary number :");
+      Scanner input2= new Scanner(System.in);
+      String num2= input2.nextLine();
+      //converting inputs to binary arrays
+      test.number(num1, num2);
+      //setting up operators
+      System.out.println("Choose: add, substract, multiply, divide");
+      Scanner input3= new Scanner(System.in);
+      char operator= input3.next().charAt(0);
 
-    System.out.println("Input second 8-bits-binary number :");
-    Scanner input2= new Scanner(System.in);
-    String num2= input2.nextLine();
+      if(operator=='a' || operator=='A'){
+        System.out.println(Arrays.toString(test.addition(bin1,bin2)));
+      }
+      else if(operator=='s' || operator=='S'){
+          System.out.println(Arrays.toString(test.substraction(bin1,bin2)));
+      }
+      else if(operator=='m' || operator=='M'){
+          System.out.println(Arrays.toString(test.multiply()));
+      }
+      else if(operator=='d' || operator=='D'){
+          System.out.println(Arrays.toString(test.division())+"\n Remainder: "+Arrays.toString(test.getRemainder()));
+      }
+      else{
+          System.out.println("Invalid operator.");
+      }
 
-    test.number(num1, num2);
-
-  /* System.out.println("Choose: add, substract, multiply, divide (to quit the program enter 1)");
-    Scanner input3= new Scanner(System.in);
-    char operator= input3.next().charAt(0);
-  */
-
-  //  System.out.println("add"+Arrays.toString(test.addition(bin1,bin2)));
-  //  System.out.println("minus"+Arrays.toString(test.substraction()));
-  //  System.out.println("multiply"+Arrays.toString(test.multiply()));
-  System.out.println("division"+Arrays.toString(test.division())+ " Remainder: "+Arrays.toString(test.getRemainder()));
-/*
-  while(operator!='1'){
-    if(operator=='a' || operator=='A'){
-      System.out.println(Arrays.toString(test.addition(bin1,bin2)));
+      System.out.println("Continue? (Yes or No)");
+      Scanner input4=new Scanner(System.in);
+      char con = input4.next().charAt(0);
+      if(con=='n'|| con=='N'){
+        System.out.println("Bye");
+        break;
+      }
     }
-    else if(operator=='s' || operator=='S'){
-        System.out.println(Arrays.toString(test.substraction(bin1,bin2)));
-    }
-    else if(operator=='m' || operator=='M'){
-        System.out.println(Arrays.toString(test.multiply()));
-    }
-    else if(operator=='d' || operator=='D'){
-        System.out.println(Arrays.toString(test.division()) \n "Remainder: "+test.getRemainder());
-    }
-    else{
-        System.out.println("Invalid input.");
-    }
-    System.out.println("Choose: add, substract, multiply, divide (to quit the program enter 1)");
-    Scanner input4= new Scanner(System.in);
-    operator= input4.next().charAt(0);
-  }
-  System.out.println("The program has ended as requested."));
-*/
-
-
   }
 
   //converting the String input to integer array
