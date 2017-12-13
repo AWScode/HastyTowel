@@ -40,7 +40,7 @@ public class Binary{
           System.out.println(Arrays.toString(test.multiply()));
       }
       else if(operator=='d' || operator=='D'){
-          System.out.println(Arrays.toString(test.division())+"\n Remainder: "+Arrays.toString(test.getRemainder()));
+          System.out.println(Arrays.toString(test.division())+"\nRemainder: "+Arrays.toString(test.getRemainder()));
       }
       else{
           System.out.println("Invalid operator.");
@@ -64,6 +64,8 @@ public class Binary{
     for(int i=0; i<b.length(); i++){
       bin2[8-b.length()+i]=(int)b.charAt(i)-'0';
     }
+    //System.out.println("bin1"+Arrays.toString(bin1));
+    //System.out.println("bin2"+Arrays.toString(bin2));
   }
 
   //Method for adding the two binary inputs
@@ -117,11 +119,13 @@ public class Binary{
     for(int i=7; i>=0 ; i--){
       mut+=bin2[i]*(int)Math.pow(2,7-i);
     }
+    //System.out.println("1 "+mut);
     //multiplication is just a loop of addition
     //be aware array is a object "copyOf" prevent the value being overwrite
     for(int i=1; i<=mut; i++){
       newresult=Arrays.copyOf(result,8);
       result=Arrays.copyOf(addition(newresult, bin1),8);
+      //System.out.println("trun" + i+ Arrays.toString(result));
     }
     return result;
   }
@@ -133,6 +137,7 @@ public class Binary{
     while(true){
       int[] newresult=Arrays.copyOf(remainder,8);
       remainder=Arrays.copyOf(substraction(newresult, bin2),8);
+      System.out.println(Arrays.toString(remainder));
       if(remainder[0]!=1){
         count++;
       }
